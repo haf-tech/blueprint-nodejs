@@ -11,6 +11,16 @@ toc::[]
 
 This is simple blueprint for a Node.js application with helpful libraries.
 
+== Usage
+
+This repository is defined as GitHub Template. Create an own repo using this as template.
+
+Startup
+
+----
+$ npm start
+----
+
 == Changelog
 
 |===
