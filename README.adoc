@@ -1,0 +1,51 @@
+= Blueprint: Node.js
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+toc::[]
+
+== Overview
+
+This is simple blueprint for a Node.js application with helpful libraries.
+
+== Changelog
+
+|===
+| Version | Note
+
+| 0.1
+| Initial
+
+|===
+
+== Libraries
+
+|===
+| Lib | Version | Note
+
+| axios
+| 0.19.2
+| Successor of the `request` lib
+
+| express
+| 4.7.12
+| Express, web
+
+| express-prom-bundle
+| 6.0.0
+| Prometheus, to expose metrics
+
+| prom-client
+| 12.0.0
+| Prometheus client
+
+| morgan
+| 1.10.0
+| Logger
+
+|===
+
+.
