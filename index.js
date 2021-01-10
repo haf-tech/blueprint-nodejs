@@ -9,6 +9,7 @@ const promBundle = require("express-prom-bundle");
 const express = require('express');
 const logger = require('morgan');
 const axios = require('axios');
+const MongoClient = require('mongodb').MongoClient;
 
 
 // *** Prometheus 
@@ -50,6 +51,52 @@ app.get('/', (req, res) => {
     res.send(ret);    
 });
 
+app.get('/mongodb', (req, res) => {
+  
+  var userAgent = req.get('User-Agent');
+  var ret = "Hello you! " + userAgent;    
+  console.log('user-agent: ' + userAgent);
+
+  // Prometheus Metric: inc and set the user agent
+  counterUserAgent.labels(userAgent).inc();
+
+
+  
+  const client = new MongoClient('mongodb://localhost:27017?tls=true', {
+    tlsCAFile: '${__dirname}/certs/ca.pem',
+    tlsAllowInvalidHostnames: true
+  });
+
+  mongoDBController(userAgent)
+  
+
+  res.send(ret);    
+});
+
+
+// teset mongodb logic: insert and read
+async function mongoDBController(aUserAgent) {
+  try {
+    await client.connect();
+    const database = client.db('mdb_test');
+    const collection = database.collection('items');
+
+    // insert
+    const doc = { userAgent: aUserAgent, createdAt: Date.now() };
+    const result = await collection.insertOne(doc);
+    console.log('MongoDB insert done. #rows=' + result.insertedCount + ', _id=' + result.insertedId);
+
+    // read
+    const query = { userAgent: aUserAgent };
+    const items = await collection.findOne(query);
+    console.log(items);
+  } finally {    
+    await client.close();
+  }
+}
+
+
+// ############# Startup
 
 app.listen(app.get('port'), app.get('ip'), function() {
     

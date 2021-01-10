@@ -26,6 +26,9 @@ $ npm start
 |===
 | Version | Note
 
+| 0.2
+| Add mongodb
+
 | 0.1
 | Initial
 
@@ -37,7 +40,7 @@ $ npm start
 | Lib | Version | Note
 
 | axios
-| 0.19.2
+| 0.21.1
 | Successor of the `request` lib
 
 | express
@@ -56,6 +59,9 @@ $ npm start
 | 1.10.0
 | Logger
 
+| mongodb
+| 3.6.3
+| MongoDB Client
 |===
 
 
